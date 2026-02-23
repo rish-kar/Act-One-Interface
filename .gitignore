@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 .env.production
 
+
+# Large brochures should not be committed (use external hosting or Git LFS if needed)`nsrc/data/brochures/brochure-2026.pdf
+
