@@ -49,15 +49,26 @@ export function useGlassGradientFromImg(
           }
         }
 
-        const w = 48
-        const h = 48
+        // Sample a centre-cropped square so letterboxing/backgrounds (common with `object-contain`)
+        // don't dominate the dominant-color extraction.
+        const w = 64
+        const h = 64
         const canvas = document.createElement('canvas')
         canvas.width = w
         canvas.height = h
         const ctx = canvas.getContext('2d', { willReadFrequently: true })
         if (!ctx) return
 
-        ctx.drawImage(imgEl, 0, 0, w, h)
+        const nw = imgEl.naturalWidth || 0
+        const nh = imgEl.naturalHeight || 0
+        if (!nw || !nh) return
+
+        // Crop to the centre square (helps avoid borders/letterboxing)
+        const side = Math.min(nw, nh)
+        const sx = Math.floor((nw - side) / 2)
+        const sy = Math.floor((nh - side) / 2)
+
+        ctx.drawImage(imgEl, sx, sy, side, side, 0, 0, w, h)
         const data = ctx.getImageData(0, 0, w, h).data
         const colors = extractDominantColorsFromImageData(data)
         const g = colorsToGlassGradient(colors)

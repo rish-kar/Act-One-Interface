@@ -199,6 +199,7 @@ function DesktopGallerySection({
                   ref={activeImgRef}
                   src={active.src}
                   alt={active.alt || 'Gallery image'}
+                  crossOrigin="anonymous"
                   loading={isFirst ? 'eager' : 'lazy'}
                   className="max-h-[70vh] w-auto max-w-full object-contain"
                   decoding="async"
@@ -222,6 +223,7 @@ function DesktopGallerySection({
                   <img
                     src={img.src}
                     alt={img.alt}
+                    crossOrigin="anonymous"
                     className="h-full w-24 object-cover"
                     loading="lazy"
                     decoding="async"
