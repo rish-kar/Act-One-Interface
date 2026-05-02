@@ -11,7 +11,7 @@ import { guestActorProfiles, memberProfiles } from '../data/members'
 import MobileHomePage from './MobileHomePage'
 import useIsMobile from '../lib/useIsMobile'
 
-const brochure2024PdfUrl = new URL('../data/brochures/brochure-2024.pdf', import.meta.url).toString()
+const brochure2026PdfUrl = new URL('../data/brochures/brochure-2026.pdf', import.meta.url).toString()
 const logoVideoUrl = new URL('/media/logo.webm', import.meta.url).toString()
 const logoPngUrl = new URL('/media/logo.webp', import.meta.url).toString()
 
@@ -380,7 +380,7 @@ export default function HomePage() {
               <Link to={bannerPanel.rightCta.href} className="btn-secondary">
                 {bannerPanel.rightCta.label}
               </Link>
-              <a href={brochure2024PdfUrl} className="btn-secondary" download>
+              <a href={brochure2026PdfUrl} className="btn-secondary" download>
                 Download brochure (PDF) <ArrowDownToLine className="h-4 w-4" aria-hidden="true" />
               </a>
             </div>
