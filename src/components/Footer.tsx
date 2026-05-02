@@ -1,5 +1,4 @@
 import { ExternalLink, Mail, MapPin, Phone } from 'lucide-react'
-import { Link } from 'react-router-dom'
 import { siteContent } from '../content/siteContent'
 
 export default function Footer() {
@@ -67,19 +66,44 @@ export default function Footer() {
             <div className="text-sm font-semibold text-white">Legal</div>
             <ul className="mt-3 space-y-2 text-sm text-white/75">
               <li>
-                <Link to="/terms" className="hover:text-white transition-colors">
+                <a
+                  href="/terms"
+                  className="hover:text-white transition-colors"
+                >
                   Terms & Conditions
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/privacy" className="hover:text-white transition-colors">
+                <a
+                  href="/privacy"
+                  className="hover:text-white transition-colors"
+                >
                   Privacy Policy
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/refund" className="hover:text-white transition-colors">
+                <a
+                  href="/refund"
+                  className="hover:text-white transition-colors"
+                >
                   Refund Policy
-                </Link>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/return-policy"
+                  className="hover:text-white transition-colors"
+                >
+                  Return Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/shipping-policy"
+                  className="hover:text-white transition-colors"
+                >
+                  Shipping Policy
+                </a>
               </li>
             </ul>
           </div>

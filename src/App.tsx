@@ -21,6 +21,8 @@ const SupportUsPage = lazy(() => import('./pages/SupportUsPage'))
 const TermsPage = lazy(() => import('./pages/TermsPage'))
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'))
 const RefundPolicyPage = lazy(() => import('./pages/RefundPolicyPage'))
+const ReturnPolicyPage = lazy(() => import('./pages/ReturnPolicyPage'))
+const ShippingPolicyPage = lazy(() => import('./pages/ShippingPolicyPage'))
 
 // Global error boundary to prevent crashes
 class AppErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean; error: Error | null }> {
@@ -93,6 +95,8 @@ function AppRoutes() {
           <Route path="/terms" element={<WrapRoute><TermsPage /></WrapRoute>} />
           <Route path="/privacy" element={<WrapRoute><PrivacyPolicyPage /></WrapRoute>} />
           <Route path="/refund" element={<WrapRoute><RefundPolicyPage /></WrapRoute>} />
+          <Route path="/return-policy" element={<WrapRoute><ReturnPolicyPage /></WrapRoute>} />
+          <Route path="/shipping-policy" element={<WrapRoute><ShippingPolicyPage /></WrapRoute>} />
           <Route path="*" element={<WrapRoute><NotFoundPage /></WrapRoute>} />
         </Routes>
       </AnimatePresence>

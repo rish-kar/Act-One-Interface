@@ -1,5 +1,5 @@
-import { ArrowRight, ArrowDownToLine, ExternalLink, Users } from 'lucide-react'
-import { useEffect, useMemo, useState, useRef } from 'react'
+import { ArrowRight, ExternalLink, Users } from 'lucide-react'
+import { lazy, Suspense, useEffect, useMemo, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import GlassPanel from '../components/GlassPanel'
 import ResponsiveImage from '../components/ResponsiveImage'
@@ -11,7 +11,7 @@ import { guestActorProfiles, memberProfiles } from '../data/members'
 import MobileHomePage from './MobileHomePage'
 import useIsMobile from '../lib/useIsMobile'
 
-const brochure2024PdfUrl = new URL('../data/brochures/brochure-2024.pdf', import.meta.url).toString()
+const BrochureViewer = lazy(() => import('../components/BrochureViewer'))
 const logoVideoUrl = new URL('/media/logo.webm', import.meta.url).toString()
 const logoPngUrl = new URL('/media/logo.webp', import.meta.url).toString()
 
@@ -48,6 +48,16 @@ function BackgroundSlideshow() {
   const [aIdx, setAIdx] = useState(0)
   const [bIdx, setBIdx] = useState(1)
   const [showA, setShowA] = useState(true)
+
+  // Use refs to track current values without triggering re-renders in the interval
+  const aIdxRef = useRef(aIdx)
+  const bIdxRef = useRef(bIdx)
+  const showARef = useRef(showA)
+
+  // Keep refs in sync with state
+  useEffect(() => { aIdxRef.current = aIdx }, [aIdx])
+  useEffect(() => { bIdxRef.current = bIdx }, [bIdx])
+  useEffect(() => { showARef.current = showA }, [showA])
 
   // rolling preload cache (mutable by design)
   const preloadCacheRef = useRef<Map<string, Promise<void>>>(new Map())
@@ -110,10 +120,11 @@ function BackgroundSlideshow() {
     preloadBatch(start, 10)
   }, [images, images.length, preload, preloadBatch])
 
-  // Keep a stable interval and ensure the next image is preloaded before we crossfade.
+  // Keep a stable interval - NO state dependencies to avoid interval reset
   useEffect(() => {
     if (!images.length) return
     if (images.length === 1) return
+    if (reducedMotion) return
 
     let cancelled = false
     let shownCount = 0
@@ -121,31 +132,29 @@ function BackgroundSlideshow() {
     const pickRandomNext = (current: number) => {
       if (images.length <= 1) return current
       let next = Math.floor(Math.random() * images.length)
-      // avoid immediate repeats
       if (next === current) next = (next + 1) % images.length
       return next
     }
 
     const intervalId = window.setInterval(async () => {
       if (cancelled) return
-      if (reducedMotion) return
       if (document.hidden) return
 
-      const current = showA ? aIdx : bIdx
+      const currentShowA = showARef.current
+      const current = currentShowA ? aIdxRef.current : bIdxRef.current
       const next = pickRandomNext(current)
 
-      // Ensure hidden layer holds the next image before fading.
-      if (showA) setBIdx(next)
+      // Set the hidden layer to the next image
+      if (currentShowA) setBIdx(next)
       else setAIdx(next)
 
-      // Guarantee next image is loaded before flipping opacity.
+      // Guarantee next image is loaded before flipping opacity
       await preload(images[next] ?? '')
       if (cancelled) return
 
       setShowA((v) => !v)
 
       shownCount += 1
-      // When we hit the 8th shown image, preload the next 10 (rolling buffer).
       if (shownCount % 10 === 8) {
         preloadBatch(next, 10)
       }
@@ -155,7 +164,7 @@ function BackgroundSlideshow() {
       cancelled = true
       window.clearInterval(intervalId)
     }
-  }, [images, images.length, reducedMotion, aIdx, bIdx, showA, preload, preloadBatch])
+  }, [images, images.length, reducedMotion, preload, preloadBatch])
 
   const aSrc = images[aIdx] ?? ''
   const bSrc = images[bIdx] ?? ''
@@ -277,7 +286,6 @@ export default function HomePage() {
     }
   }, [])
 
-  const upcomingPosterUrl = useMemo(() => new URL('../data/images/Poster.webp', import.meta.url).toString(), [])
   const allPeople = useMemo(() => [...memberProfiles, ...guestActorProfiles], [])
   const isMobile = useIsMobile(640)
 
@@ -319,9 +327,6 @@ export default function HomePage() {
               <p className="mt-5 max-w-prose text-base leading-relaxed text-white/75 whitespace-pre-line text-justify">
                 {hero.subcopy}
               </p>
-
-              {/* CTAs intentionally removed on the Home page for now (identity-first). */}
-              {/* Quick stat cards intentionally removed. */}
             </div>
           </SectionReveal>
 
@@ -355,6 +360,7 @@ export default function HomePage() {
           </GlassPanel>
         </SectionReveal>
 
+        {/* ─── Upcoming Shows (ShowGrid) ─── */}
         <section className="mt-12">
           <SectionReveal>
             <div className="flex items-baseline justify-between gap-4">
@@ -370,23 +376,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <SectionReveal>
-          <div className="mt-12 mb-2 rounded-3xl border border-white/10 bg-gradient-to-r from-white/5 via-white/3 to-white/5 p-7 md:flex md:items-center md:justify-between">
-            <div>
-              <div className="text-sm font-semibold text-white">{bannerPanel.leftTitle}</div>
-              <div className="mt-1 text-white/70">{bannerPanel.leftText}</div>
-            </div>
-            <div className="mt-5 flex flex-wrap items-center gap-3 md:mt-0">
-              <Link to={bannerPanel.rightCta.href} className="btn-secondary">
-                {bannerPanel.rightCta.label}
-              </Link>
-              <a href={brochure2024PdfUrl} className="btn-secondary" download>
-                Download brochure (PDF) <ArrowDownToLine className="h-4 w-4" aria-hidden="true" />
-              </a>
-            </div>
-          </div>
-        </SectionReveal>
-
+        {/* ─── Members ─── */}
         <SectionReveal>
           <div className="mt-10 hidden sm:block">
             <GlassPanel
@@ -409,7 +399,7 @@ export default function HomePage() {
                     Meet the artists and organisers behind Prarambh—and our guest actors.
                   </p>
                 </div>
-                <Users className="h-6 w-6 text-white/60 flex-shrink-0" aria-hidden="true" />
+                <Users className="h-6 w-6 text-white/60 shrink-0" aria-hidden="true" />
               </div>
 
               <div className="mt-5 flex flex-wrap gap-3">
@@ -448,15 +438,16 @@ export default function HomePage() {
           </div>
         </SectionReveal>
 
+        {/* ─── Brochure Viewer (replaces old poster section) ─── */}
         <section className="mt-12">
           <SectionReveal>
-            <h2 className="font-serif text-white section-heading">Upcoming Shows</h2>
+            <h2 className="font-serif text-white section-heading">Our Brochure</h2>
           </SectionReveal>
 
           <SectionReveal delay={0.08}>
             <GlassPanel
               className="mt-6 p-4 sm:p-6 md:p-8"
-              labelledBy="upcoming-poster"
+              labelledBy="brochure-viewer"
               style={
                 ({
                   ['--glass-gradient']:
@@ -464,25 +455,20 @@ export default function HomePage() {
                 } as React.CSSProperties)
               }
             >
-              <div className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/20">
-                <img
-                  src={upcomingPosterUrl}
-                  alt="Upcoming shows poster"
-                  className="w-full h-auto"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link to="/shows" className="btn-primary">
-                  Book Seats
-                </Link>
-              </div>
+              <Suspense
+                fallback={
+                  <div className="flex items-center justify-center py-20 text-white/50 text-sm">
+                    Loading brochure…
+                  </div>
+                }
+              >
+                <BrochureViewer />
+              </Suspense>
             </GlassPanel>
           </SectionReveal>
         </section>
 
+        {/* ─── Press & Reviews ─── */}
         <section className="mt-12">
           <SectionReveal>
             <h2 className="font-serif text-white section-heading">{pressAndReviewsSection.title}</h2>
@@ -532,6 +518,21 @@ export default function HomePage() {
             ))}
           </div>
         </section>
+
+        {/* ─── Support & Feedback Banner (moved below Press & Reviews) ─── */}
+        <SectionReveal>
+          <div className="mt-12 mb-2 rounded-3xl border border-white/10 bg-linear-to-r from-white/5 via-white/3 to-white/5 p-7 md:flex md:items-center md:justify-between">
+            <div>
+              <div className="text-sm font-semibold text-white">{bannerPanel.leftTitle}</div>
+              <div className="mt-1 text-white/70">{bannerPanel.leftText}</div>
+            </div>
+            <div className="mt-5 flex flex-wrap items-center gap-3 md:mt-0">
+              <Link to={bannerPanel.rightCta.href} className="btn-secondary">
+                {bannerPanel.rightCta.label}
+              </Link>
+            </div>
+          </div>
+        </SectionReveal>
 
         <div className="h-8" />
       </div>
