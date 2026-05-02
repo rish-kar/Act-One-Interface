@@ -155,6 +155,7 @@ export const siteContent: SiteContent = {
       { label: 'Book Seats', href: '/shows' },
       { label: 'Gallery', href: '/gallery' },
       { label: 'Workshops', href: '/gallery/workshops' },
+      { label: 'Social Work', href: '/gallery/social-work' },
       { label: 'Members', href: '/members' },
       { label: 'Previous shows', href: '/previous-shows' },
       { label: 'Support Us', href: '/support-us' },

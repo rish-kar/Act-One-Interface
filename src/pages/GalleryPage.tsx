@@ -271,6 +271,23 @@ export default function GalleryPage() {
           >
             Backstage
           </Link>
+          <Link
+            to="/gallery/social-work"
+            style={{
+              display: 'inline-block',
+              marginTop: 12,
+              marginLeft: 8,
+              padding: '8px 16px',
+              backgroundColor: 'rgba(255,255,255,0.1)',
+              border: '1px solid rgba(255,255,255,0.2)',
+              borderRadius: 8,
+              color: 'white',
+              fontSize: 14,
+              textDecoration: 'none',
+            }}
+          >
+            Social Work
+          </Link>
         </header>
 
         {sections.map((section, i) => (
@@ -298,6 +315,9 @@ export default function GalleryPage() {
             <div className="flex items-center gap-2">
               <Link to="/gallery/backstage" className="btn-secondary px-4 py-2">
                 Backstage
+              </Link>
+              <Link to="/gallery/social-work" className="btn-secondary px-4 py-2">
+                Social Work
               </Link>
             </div>
           </div>
