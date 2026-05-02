@@ -1,4 +1,4 @@
-# Logs
+﻿# Logs
 logs
 *.log
 npm-debug.log*
@@ -25,5 +25,6 @@ dist-ssr
 .env.production
 
 
-# Large brochures should not be committed (use external hosting or Git LFS if needed)`nsrc/data/brochures/brochure-2026.pdf
+# NOTE: brochures are intentionally versioned in this repo (or via Git LFS).
+# If you want to exclude large PDFs again, prefer using Git LFS instead of .gitignore.
 
