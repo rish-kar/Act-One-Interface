@@ -27,6 +27,7 @@ const moreMenuItems: MoreMenuItem[] = [
   { label: 'Members', href: '/members' },
   { label: 'Previous Shows', href: '/previous-shows' },
   { label: 'Workshops', href: '/gallery/workshops' },
+  { label: 'Social Work', href: '/gallery/social-work' },
   { label: 'Support Us', href: '/support-us' },
   { label: 'Send Feedback', href: '/feedback' },
   { label: 'Contact', href: '/contact' },
