@@ -35,6 +35,19 @@ export const backgroundGalleryImages: GalleryImage[] = galleryImages.filter((img
 // Filenames follow: playSlug-<number>.<ext> (e.g., uttara-01.jpg).
 export const playGallerySections: PlayGallerySection[] = [
   {
+    id: 'breath',
+    title: 'Breath',
+    synopsis: 'Delhi\'s air pollution is a severe, recurring environmental and public health crisis that worsens dramatically each winter. The issue is complex, stemming from a combination of meteorological conditions, local emission sources, and regional agricultural practices. The following sections break down the causes, the stark impact on human health, and the measures being taken to combat it.',
+    images: Array.from({ length: 26 }, (_, i) => {
+      const n = String(i + 1).padStart(2, '0')
+      return {
+        id: `breath-${n}`,
+        src: new URL(`./images/gallery/previousPlays/Breath/breath-${n}.webp`, import.meta.url).href,
+        alt: 'Breath',
+      }
+    }),
+  },
+  {
     id: 'chorabali',
     title: 'Chorabali',
     synopsis: 'The Headmaster faces the chalkboard, a cornerstone of the community, a designer of destinies. For many years, his persona has been depicted on the classroom blackboard: Mr. Satya Bhushan Dutta the teacher, the enforcer, the ethical guide for countless generations of students. His power is founded on trust, his regard gained through knowledge and justice. Next, the unimaginable occurs in his life. In an instant, the core supports of his existence crumble into a heap of personal suffering and societal critique. This narrative illustrates a teacher’s distinctly powerless situation, trapped between an unwavering parental love and the relentless demands of his societal responsibilities.',
@@ -42,7 +55,7 @@ export const playGallerySections: PlayGallerySection[] = [
       const n = String(i + 1).padStart(2, '0')
       return {
         id: `chorabali-${n}`,
-        src: new URL(`./images/gallery/previousPlays/Chorabali/chorabali-${n}.jpeg`, import.meta.url).href,
+        src: new URL(`./images/gallery/previousPlays/Chorabali/chorabali-${n}.webp`, import.meta.url).href,
         alt: 'Chorabali',
       }
     }),
@@ -57,7 +70,7 @@ export const playGallerySections: PlayGallerySection[] = [
       const n = String(i + 1).padStart(2, '0')
       return {
         id: `gobhir-asukh-${n}`,
-        src: new URL(`./images/gallery/previousPlays/GobhirAsukh/gobhir-asukh-${n}.jpeg`, import.meta.url).href,
+        src: new URL(`./images/gallery/previousPlays/GobhirAsukh/gobhir-asukh-${n}.webp`, import.meta.url).href,
         alt: 'Gobhir Asukh',
       }
     }),
