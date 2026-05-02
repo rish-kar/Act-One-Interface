@@ -15,6 +15,37 @@ export type PreviousShow = {
 
 export const previousShows: PreviousShow[] = [
   {
+    id: 'breath',
+    title: 'Breath',
+    imageSrc: new URL('./images/previousCards/Breath.webp', import.meta.url).href,
+    date: '5th April 2026',
+    venue: 'Muktadhara Auditorium',
+    language: 'Silent Play',
+    direction: 'Rabi Shankar Kar',
+  },
+  {
+    id: 'chorabali',
+    title: 'Chorabali',
+    imageSrc: new URL('./images/previousCards/Chorabali.webp', import.meta.url).href,
+    date: '8th February 2026',
+    venue: 'Muktadhara Auditorium',
+    language: 'Bengali',
+    writtenBy: 'Sh. Shiv Shankar Chakraborty',
+    direction: 'Rabi Shankar Kar',
+    credits: 'Assistant Director: Priyadarshi Banerjee',
+  },
+  {
+    id: 'gobhir-asukh',
+    title: 'Gobhir Asukh',
+    imageSrc: new URL('./images/previousCards/Gobhir Asukh.webp', import.meta.url).href,
+    date: '8th February 2026',
+    venue: 'Muktadhara Auditorium',
+    language: 'Bengali',
+    writtenBy: 'Subodh Dey',
+    direction: 'Rabi Shankar Kar',
+    credits: 'Assistant Director: Priyadarshi Banerjee',
+  },
+  {
     id: 'aayesha',
     title: 'Aayesha',
     imageSrc: new URL('./images/previousCards/Aayesha.webp', import.meta.url).href,

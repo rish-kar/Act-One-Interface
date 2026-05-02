@@ -35,6 +35,47 @@ export const backgroundGalleryImages: GalleryImage[] = galleryImages.filter((img
 // Filenames follow: playSlug-<number>.<ext> (e.g., uttara-01.jpg).
 export const playGallerySections: PlayGallerySection[] = [
   {
+    id: 'breath',
+    title: 'Breath',
+    synopsis: 'Delhi\'s air pollution is a severe, recurring environmental and public health crisis that worsens dramatically each winter. The issue is complex, stemming from a combination of meteorological conditions, local emission sources, and regional agricultural practices. The following sections break down the causes, the stark impact on human health, and the measures being taken to combat it.',
+    images: Array.from({ length: 26 }, (_, i) => {
+      const n = String(i + 1).padStart(2, '0')
+      return {
+        id: `breath-${n}`,
+        src: new URL(`./images/gallery/previousPlays/Breath/breath-${n}.webp`, import.meta.url).href,
+        alt: 'Breath',
+      }
+    }),
+  },
+  {
+    id: 'chorabali',
+    title: 'Chorabali',
+    synopsis: 'The Headmaster faces the chalkboard, a cornerstone of the community, a designer of destinies. For many years, his persona has been depicted on the classroom blackboard: Mr. Satya Bhushan Dutta the teacher, the enforcer, the ethical guide for countless generations of students. His power is founded on trust, his regard gained through knowledge and justice. Next, the unimaginable occurs in his life. In an instant, the core supports of his existence crumble into a heap of personal suffering and societal critique. This narrative illustrates a teacher’s distinctly powerless situation, trapped between an unwavering parental love and the relentless demands of his societal responsibilities.',
+    images: Array.from({ length: 19 }, (_, i) => {
+      const n = String(i + 1).padStart(2, '0')
+      return {
+        id: `chorabali-${n}`,
+        src: new URL(`./images/gallery/previousPlays/Chorabali/chorabali-${n}.webp`, import.meta.url).href,
+        alt: 'Chorabali',
+      }
+    }),
+  },
+  {
+    id: 'gobhir-asukh',
+    title: 'Gobhir Asukh',
+    synopsis: 'Elderly members of the family often suffer alone. In their minds, they often feel regret "Those for whom I gave my best time, when I was engaged with the wider world — they don\'t have time for me now, no time to talk with me."\n' +
+        'At that time, they withdraw deep within themselves — they spend their days with the thought that they will find peace only when they are released from life. However, one cannot simply get release from life just by wishing it. This is a problem for an elderly person. At present, this period has become evident as families are primarily nuclear. Consequently, elderly parents endure loneliness due to household duties, being deeply involved in career matters, and being preoccupied with personal issues. Furthermore, when an individual loses their life partner in their later years, this loneliness intensifies significantly. However, wherever there is an issue, there also lies a resolution — Rather than faulting the children of the senior family member and viewing the matter negatively, we should adopt a new perspective. Above all, we must keep in mind: while there is breath, there is existence. Growing older does not signify that the joys, pleasures, preferences, aversions, and experiences of life have come to an end — that is incorrect. As long as we exist, embrace life completely. For this reason, we have to remember several points: Primarily, we must prioritize our own physical and mental health. The play Gobhir Asukh signifies mental illness is, as we understand, a much more profound condition than physical illness. \n' +
+        '\n',
+    images: Array.from({ length: 15 }, (_, i) => {
+      const n = String(i + 1).padStart(2, '0')
+      return {
+        id: `gobhir-asukh-${n}`,
+        src: new URL(`./images/gallery/previousPlays/GobhirAsukh/gobhir-asukh-${n}.webp`, import.meta.url).href,
+        alt: 'Gobhir Asukh',
+      }
+    }),
+  },
+  {
     id: 'chenni',
     title: 'Chenni',
     synopsis:

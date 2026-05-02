@@ -16,6 +16,7 @@ const PreviousShowsPage = lazy(() => import('./pages/PreviousShowsPage'))
 const ShowsPage = lazy(() => import('./pages/ShowsPage'))
 const SupportFeedbackPage = lazy(() => import('./pages/SupportFeedbackPage'))
 const WorkshopsGalleryPage = lazy(() => import('./pages/WorkshopsGalleryPage'))
+const SocialWorkGalleryPage = lazy(() => import('./pages/SocialWorkGalleryPage'))
 const FeedbackPage = lazy(() => import('./pages/FeedbackPage'))
 const SupportUsPage = lazy(() => import('./pages/SupportUsPage'))
 const TermsPage = lazy(() => import('./pages/TermsPage'))
@@ -86,6 +87,7 @@ function AppRoutes() {
           <Route path="/gallery" element={<WrapRoute><GalleryPage /></WrapRoute>} />
           <Route path="/gallery/backstage" element={<WrapRoute><BackstageGalleryPage /></WrapRoute>} />
           <Route path="/gallery/workshops" element={<WrapRoute><WorkshopsGalleryPage /></WrapRoute>} />
+          <Route path="/gallery/social-work" element={<WrapRoute><SocialWorkGalleryPage /></WrapRoute>} />
           <Route path="/support-us" element={<WrapRoute><SupportUsPage /></WrapRoute>} />
           <Route path="/feedback" element={<WrapRoute><FeedbackPage /></WrapRoute>} />
           <Route path="/previous-shows" element={<WrapRoute><PreviousShowsPage /></WrapRoute>} />
