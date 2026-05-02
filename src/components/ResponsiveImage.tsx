@@ -64,7 +64,8 @@ export default function ResponsiveImage({
       height={height}
       loading={loading}
       decoding={decoding}
-      fetchPriority={fetchPriority}
+      // Use lowercase fetchpriority for valid HTML attribute
+      {...{ fetchpriority: fetchPriority }}
       style={style}
     />
   )

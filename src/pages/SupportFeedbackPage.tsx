@@ -65,7 +65,7 @@ export default function SupportFeedbackPage() {
     () =>
       ({
         ['--glass-gradient']:
-          'linear-gradient(145deg, rgba(0,10,55,0.38) 0%, rgba(0,0,0,0.62) 55%, rgba(0,0,0,0.25) 100%)',
+          'linear-gradient(145deg, rgba(0,10,55,0.46) 0%, rgba(0,0,0,0.70) 55%, rgba(0,0,0,0.32) 100%)',
       } as React.CSSProperties),
     [],
   )
@@ -101,8 +101,8 @@ export default function SupportFeedbackPage() {
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
         <SectionReveal>
           <GlassPanel className="p-6 md:p-8" style={panelStyle}>
-            <div className="text-sm font-semibold text-white">Feedback</div>
-            <div className="mt-2 text-sm text-white/70">Tell us what stayed with you—moments, music, or performances.</div>
+            <div className="text-sm font-semibold text-white" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>Feedback</div>
+            <div className="mt-2 text-sm text-white/70" style={{ textShadow: '0 2px 6px rgba(0,0,0,0.7)' }}>Tell us what stayed with you—moments, music, or performances.</div>
 
             {feedbackSubmitted ? (
               <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/80">
