@@ -67,7 +67,7 @@ export default function ShowGrid({ limit, compact }: { limit?: number; compact?:
   if (!rows.length) {
     return (
       <GlassPanel className="p-6 text-sm text-white/70">
-        There are no upcoming shows.
+        No upcoming shows are scheduled yet. Check back soon.
       </GlassPanel>
     )
   }

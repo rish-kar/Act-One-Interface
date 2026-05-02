@@ -18,7 +18,7 @@ export default function MobileHomePage({ BackgroundSlideshow }: Props) {
 
   const logoUrl = new URL('../data/images/Logo Image.webp', import.meta.url).toString()
   const upcomingPosterUrl = new URL('../data/images/Poster.webp', import.meta.url).toString()
-  const brochureUrl = new URL('../data/brochures/brochure-2026.pdf', import.meta.url).toString()
+  const brochureUrl = new URL('../data/brochures/brochure-2024.pdf', import.meta.url).toString()
 
   // Preload above-the-fold assets for faster first paint on mobile.
   const preloadImage = (src: string) => {
